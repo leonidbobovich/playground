@@ -12,12 +12,14 @@ type -p gh >/dev/null && echo Found gh || (curl -fsSL https://cli.github.com/pac
 
 
 cd ${HOME}
-[ -d venv ] && rm -rf ${HOME}/venv
-python3 -m virtualenv venv
-source ${HOME}/venv/bin/activate
-pip install -U pip setuptools wheel
+if [ ! -d ${HOME}/venv ]; then
+	python3 -m virtualenv venv
+	source ${HOME}/venv/bin/activate
+	pip install -U pip setuptools wheel
+fi
 pip install --upgrade torch huggingface transformers transformers[torch] trl
-pip list
+#pip list
+#       dd	&& rm -rf ${HOME}/venv
 
 cd ${HOME}
 disks=$(lsblk -d | grep disk | awk '{print $1}' | sort)
