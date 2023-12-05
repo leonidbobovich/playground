@@ -34,7 +34,7 @@ do
 		fstype=$(blkid -o value -s TYPE /dev/nvme1n1)
 		if [ "${fstype}" == "" ]; then
 			echo "Disk ${d} not mounted and not formatted"
-			sudo mkfs.xfs -f ${d}
+			sudo mkfs.xfs -f /dev/${d}
 		else
 			echo "Disk ${d} not mounted and formatted for ${fstype}"
 		fi
