@@ -17,7 +17,7 @@ if [ ! -d ${HOME}/venv ]; then
 	source ${HOME}/venv/bin/activate
 	pip install -U pip setuptools wheel
 fi
-pip install --upgrade torch huggingface transformers transformers[torch] trl
+pip install --upgrade torch huggingface transformers transformers[torch] trl hf_transfer
 #pip list
 #       dd	&& rm -rf ${HOME}/venv
 
@@ -39,7 +39,7 @@ do
 			echo "Disk ${d} not mounted and formatted for ${fstype}"
 		fi
 		sudo mkdir /mnt/disk${mountpoint}
-		sudo mount ${d} /mnt/disk${mountpoint}
+		sudo mount /dev/${d} /mnt/disk${mountpoint}
 		sudo chown -R ${USER} /mnt/disk${mountpoint}
 		echo Disk ${d} mounted on  /mnt/disk${mountpoint}
 		if [ "${setup_hf}" == "0" ]; then	
