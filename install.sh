@@ -39,7 +39,7 @@ do
 		else
 			echo "Disk ${d} not mounted and formatted for ${fstype}"
 		fi
-		sudo mkdir /mnt/disk${mountpoint}
+		[ ! -d /mnt/disk${mountpoint} ] && sudo mkdir /mnt/disk${mountpoint}
 		sudo mount /dev/${d} /mnt/disk${mountpoint}
 		sudo chown -R ${USER} /mnt/disk${mountpoint}
 		echo Disk ${d} mounted on  /mnt/disk${mountpoint}
@@ -47,9 +47,7 @@ do
 			cache_hf_dir=${HOME}/.cache/huggingface
 			echo Setting up hf on new disk ${d} /mnt/disk${mountpoint}/huggingface
 			[ ! -d /mnt/disk${mountpoint}/huggingface ] && mkdir /mnt/disk${mountpoint}/huggingface
-			[ -d ${HOME}/.cache/huggingface ] && mv ${HOME}/.cache/huggingface/ /mnt/disk${mountpoint}/huggingface
-			ln -s /mnt/disk${mountpoint}/huggingface ${HOME}/.cache/huggingface
-			ls -l ${HOME}/.cache
+			[ -d ${HOME}/.cache/huggingface ] && cd ${HOME}/.cache/huggingface && (tar czvf - . | (cd /mnt/disk${mountpoint}/huggingface && tar xzvf - . )) && ( [ -d ${HOME}/.cache/huggingface ] && rm -rf ${HOME}/.cache/huggingface || rm ${HOME}/.cache/huggingface ) && ln -s /mnt/disk${mountpoint}/huggingface ${HOME}/.cache/huggingface
 			setup_hf=1
 		fi
 
@@ -58,3 +56,5 @@ do
 		echo Disk already inuse ${inuse} ignore
 	fi
 done
+ls -l ${HOME}/.cache
+ls -l ${HOME}/.cache/huggingface
