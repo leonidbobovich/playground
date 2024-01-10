@@ -98,7 +98,7 @@ model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
 def tokenize(sample):
-    tokenized_text =  tokenizer(sample["text"], padding=True, truncation=True, max_length=512)
+    tokenized_text =  tokenizer(sample["text"], padding=True, truncation=True, max_length=1024)
     return tokenized_text
 
 #data = load_dataset("BI55/MedText", "main", split="train")
@@ -116,7 +116,7 @@ tokenized_data
 
 training_arguments = TrainingArguments(
         output_dir="phi-1_5-finetuned-med-text",
-        per_device_train_batch_size=4,
+        per_device_train_batch_size=14,
         gradient_accumulation_steps=1,
         learning_rate=2e-4,
         lr_scheduler_type="cosine",
@@ -155,15 +155,13 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 #model = AutoModelForCausalLM.from_pretrained("phi-1_5-finetuned-med-text", trust_remote_code=True, torch_dtype=torch.float32)
-model = AutoModelForCausalLM.from_pretrained("phi-1_5-finetuned-med-text", trust_remote_code=True, torch_dtype=torch.float32, device_map={"":0})
+model = AutoModelForCausalLM.from_pretrained("phi-1_5-finetuned-med-text", trust_remote_code=True, torch_dtype=torch.float16, device_map={"":0})
 
 tokenizer = AutoTokenizer.from_pretrained("microsoft/phi-1_5", trust_remote_code=True)
 
-print(model.device)
+inputs = tokenizer('I am having a headache with but no fever - what could be the cause', return_tensors="pt", return_attention_mask=False).to(model.device)
 
-inputs = tokenizer('I am having a headache with but no fever - what could be the cause', return_tensors="pt", return_attention_mask=False).to("cuda")
-
-outputs = model.generate(**inputs, max_length=512).to("cpu")
+outputs = model.generate(**inputs, max_length=2048, eos_token_id=tokenizer.eos_token_id).to(torch.device('cpu'))
 
 text = tokenizer.batch_decode(outputs)[0]
 
