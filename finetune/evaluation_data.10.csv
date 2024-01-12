@@ -1,0 +1,21 @@
+Text
+"[INST] Here is a database schema: table schema: :  Player [ text ] Tries [ real ] Goals [ text ] Field Goals [ real ] Points [ real ]
+  Please write me a syntactically correct SQL statement that answers the following question: How many tries did the player have which ended with 20 Points?.It is not neccessary to use all the tables.[/INST] SELECT Tries FROM table WHERE Points = 20"
+"[INST] Here is a database schema: table schema: :  Division [ text ] League Apps (Sub) [ real ] League Goals [ real ] FA Cup Apps (Sub) [ text ] FA Cup Goals [ real ] FL Cup Apps (Sub) [ real ] FL Cup Goals [ real ] Other Apps [ real ] Other Goals [ real ] Total Apps (Sub) [ text ] Total Goals [ real ]
+  Please write me a syntactically correct SQL statement that answers the following question: What division has the highest FA Cup Goals, but a Total Goal score less than 5, and a Total Apps of 52?.It is not neccessary to use all the tables.[/INST] SELECT MAX FA Cup Goals FROM table WHERE Total Apps (Sub) = 52 AND Total Goals < 5"
+"[INST] Here is a database schema: table schema: table_45719:  ""Japanese"" [ text]  ""R\u014dmaji"" [ text]  ""Meaning"" [ text]  ""Chinese"" [ text]  ""Romanization"" [ text] 
+  Please write me a syntactically correct SQL statement that answers the following question: What are the Japanese characters for the Chinese word ?It is not neccessary to use all the tables.[/INST] SELECT ""Japanese"" FROM table_45719 WHERE ""Chinese"" = '叉焼'"
+"[INST] Here is a database schema: table schema: table_name_13:  (director [ VARCHAR ] producer [ VARCHAR) ]
+  Please write me a syntactically correct SQL statement that answers the following question: What is the name of the director who directed the movie that Raintree Pictures produced?It is not neccessary to use all the tables.[/INST] SELECT director FROM table_name_13 WHERE producer = ""raintree pictures"""
+"[INST] Here is a database schema: table schema: table_23214055_2:  (syrian_christians [ VARCHAR ] district [ VARCHAR) ]
+  Please write me a syntactically correct SQL statement that answers the following question: Name the syrian christians for kollamIt is not neccessary to use all the tables.[/INST] SELECT syrian_christians FROM table_23214055_2 WHERE district = ""Kollam"""
+"[INST] Here is a database schema: table schema: table_name_55:  population_millions [ INTEGER]  influence [ VARCHAR] 
+  Please write me a syntactically correct SQL statement that answers the following question: What is the highest population in the millions that has an influence of 1.02?It is not neccessary to use all the tables.[/INST] SELECT MAX(population_millions) FROM table_name_55 WHERE influence = 1.02"
+"[INST] Here is a database schema: table schema: table_name_80:  (opponents [ INTEGER ] date [ VARCHAR) ]
+  Please write me a syntactically correct SQL statement that answers the following question: What is the Opponents in the game with a Date of nov. 25?It is not neccessary to use all the tables.[/INST] SELECT MIN(opponents) FROM table_name_80 WHERE date = ""nov. 25"""
+"[INST] Here is a database schema: table schema: :  product [ text ] dimensions (mm) [ text ] pages per minute (color) [ real ] max page size [ text ] interface [ text ]
+  Please write me a syntactically correct SQL statement that answers the following question: What is the interface of the product xerox travel scanner 100?.It is not neccessary to use all the tables.[/INST] SELECT interface FROM table WHERE product = xerox travel scanner 100"
+"[INST] Here is a database schema: table schema: :  Round [ real ] Pick [ real ] Player [ text ] Position [ text ] School/Club Team [ text ]
+  Please write me a syntactically correct SQL statement that answers the following question: Which team had a pick of 63?.It is not neccessary to use all the tables.[/INST] SELECT School/Club Team FROM table WHERE Pick = 63"
+"[INST] Here is a database schema: table schema: table_name_99:  (place [ VARCHAR ] country [ VARCHAR) ]
+  Please write me a syntactically correct SQL statement that answers the following question: What was Australia's place?It is not neccessary to use all the tables.[/INST] SELECT place FROM table_name_99 WHERE country = ""australia"""
